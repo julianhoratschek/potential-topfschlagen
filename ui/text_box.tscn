@@ -1,0 +1,100 @@
+[gd_scene load_steps=7 format=3 uid="uid://bcx4eglb788cd"]
+
+[ext_resource type="Theme" uid="uid://bmjnhfngbymmt" path="res://ui/theme.tres" id="1_6s7u3"]
+[ext_resource type="Script" path="res://ui/text_box.gd" id="1_hmtum"]
+[ext_resource type="Texture2D" uid="uid://c8avj585suhpu" path="res://assets/sprites/textbox_ninepatch.png" id="1_tr8q8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2rn4p"]
+atlas = ExtResource("1_tr8q8")
+region = Rect2(0, 0, 7, 7)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1b36t"]
+atlas = ExtResource("1_tr8q8")
+region = Rect2(7, 2, 50, 3)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paxgk"]
+atlas = ExtResource("1_tr8q8")
+region = Rect2(2, 7, 3, 50)
+
+[node name="TextBox" type="VBoxContainer"]
+process_mode = 3
+texture_filter = 1
+custom_minimum_size = Vector2(480, 180)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -198.0
+offset_right = 240.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 0
+script = ExtResource("1_hmtum")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_2rn4p")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_1b36t")
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_2rn4p")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_paxgk")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_6s7u3")
+text = "Hello World, how are you?"
+fit_content = true
+shortcut_keys_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer2"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+texture = SubResource("AtlasTexture_paxgk")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_2rn4p")
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = SubResource("AtlasTexture_1b36t")
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer3"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = SubResource("AtlasTexture_2rn4p")

@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bmjnhfngbymmt"]
+
+[ext_resource type="FontFile" uid="uid://do4rr3o41wm58" path="res://assets/fonts/retro_gaming.ttf" id="1_vb2k7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aq3w7"]
+bg_color = Color(0.517647, 0.517647, 0.517647, 0.321569)
+border_color = Color(0.521569, 0.521569, 0.521569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_awofk"]
+bg_color = Color(0.733333, 0.458824, 0.913725, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jvchd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ucibn"]
+bg_color = Color(0, 0, 0, 1)
+
+[resource]
+ProgressBar/styles/background = SubResource("StyleBoxFlat_aq3w7")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_awofk")
+RichTextLabel/font_sizes/normal_font_size = 20
+RichTextLabel/fonts/normal_font = ExtResource("1_vb2k7")
+RichTextLabel/styles/focus = SubResource("StyleBoxFlat_jvchd")
+RichTextLabel/styles/normal = SubResource("StyleBoxFlat_ucibn")
