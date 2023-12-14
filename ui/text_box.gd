@@ -29,8 +29,12 @@ const nodes := {
 		"Der Kopf ist wellenförmig geschwungen.",
 		"Ideal, um durch Wände zu tunneln!"],
 	"horn": ["TRÖÖÖT!", "Wie ein brünftiger Elch.", "Er ist wohl horny…"],
-	"game_over": ["Quantenfluktuationen haben Anti-Neele hervorgebracht.", "Du wurdest annihiliert."],
-	"schneider_defeat": ["Herzlichen Glückwunsch!", "Sie sind eine großartige Physikerin, Nelle!"],
+	"game_over": [
+		"Quantenfluktuationen haben Anti-Neele hervorgebracht.", 
+		"Du wurdest annihiliert."],
+	"schneider_defeat": [
+		"Herzlichen Glückwunsch!", 
+		"Sie sind eine großartige Physikerin, Nelle!"],
 	"schneider_intro": [
 		"Heute machen wir Wheatstone-Brücke.", 
 		"Das ist eine ganz komplizierte Schaltung.",

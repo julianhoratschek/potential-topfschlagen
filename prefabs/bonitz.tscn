@@ -1,3 +1,39 @@
-[gd_scene format=3 uid="uid://dnm786cid7njt"]
+[gd_scene load_steps=7 format=3 uid="uid://dnm786cid7njt"]
 
-[node name="Bonitz" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://qpl45eixj3nv" path="res://assets/sprites/Sprite-Bonitz-multi.png" id="1_fxkup"]
+[ext_resource type="Script" path="res://prefabs/bonitz.gd" id="1_mnxqw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vyk3p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3jkj"]
+atlas = ExtResource("1_fxkup")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kaccq"]
+atlas = ExtResource("1_fxkup")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hscfm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3jkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kaccq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Bonitz" type="CharacterBody2D"]
+script = ExtResource("1_mnxqw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vyk3p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hscfm")
+animation = &"idle"
+autoplay = "idle"

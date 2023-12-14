@@ -1,3 +1,38 @@
-[gd_scene format=3 uid="uid://dwba0yvkquax6"]
+[gd_scene load_steps=7 format=3 uid="uid://dwba0yvkquax6"]
 
-[node name="Snek" type="Node2D"]
+[ext_resource type="Script" path="res://prefabs/snek.gd" id="1_t4v43"]
+[ext_resource type="Texture2D" uid="uid://4emxiqt61oqn" path="res://assets/sprites/mouse.png" id="2_a4tp4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jh43d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0f3as"]
+atlas = ExtResource("2_a4tp4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1o180"]
+atlas = ExtResource("2_a4tp4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1f676"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0f3as")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1o180")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Snek" type="CharacterBody2D"]
+script = ExtResource("1_t4v43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jh43d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1f676")
+autoplay = "default"

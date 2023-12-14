@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://c01ma6xe8uvdg"]
+[gd_scene load_steps=23 format=3 uid="uid://c01ma6xe8uvdg"]
 
 [ext_resource type="Texture2D" uid="uid://cpjf32tqno43s" path="res://assets/tilemaps/Sprite-Startraum-Tileset.png" id="1_mt6u8"]
 [ext_resource type="Script" path="res://scenes/map.gd" id="2_72cpn"]
@@ -6,11 +6,16 @@
 [ext_resource type="PackedScene" uid="uid://cxmvthq3etcha" path="res://prefabs/fissure.tscn" id="3_rel8y"]
 [ext_resource type="PackedScene" uid="uid://c3byjcsyu8gr8" path="res://prefabs/player.tscn" id="4_akope"]
 [ext_resource type="PackedScene" uid="uid://dnm786cid7njt" path="res://prefabs/bonitz.tscn" id="4_bpp1o"]
+[ext_resource type="Texture2D" uid="uid://r8ega6qvatkp" path="res://assets/sprites/Sprite-StoneWavePick.png" id="4_dahpa"]
 [ext_resource type="PackedScene" uid="uid://dsqwrrntugsk8" path="res://prefabs/neighbour.tscn" id="5_rtwjg"]
 [ext_resource type="PackedScene" uid="uid://bx31ot2rs06py" path="res://prefabs/schneider.tscn" id="6_f2hsc"]
+[ext_resource type="Texture2D" uid="uid://c65xoom2bq1qk" path="res://assets/sprites/Sprite-IronWavePick.png" id="6_r44mm"]
 [ext_resource type="PackedScene" uid="uid://c7fylw7xyyawx" path="res://prefabs/ina.tscn" id="7_g1mii"]
 [ext_resource type="PackedScene" uid="uid://gdes5yioucnl" path="res://prefabs/frank.tscn" id="8_spkjd"]
-[ext_resource type="PackedScene" uid="uid://dwba0yvkquax6" path="res://prefabs/snek.tscn" id="9_pymtp"]
+[ext_resource type="Texture2D" uid="uid://i7hhnyw1tgos" path="res://assets/sprites/Sprite-DiaWavePick.png" id="9_88hte"]
+[ext_resource type="Texture2D" uid="uid://c1hri8dvkxcij" path="res://assets/sprites/Sprite-bleistift.png" id="11_hbc4f"]
+[ext_resource type="Texture2D" uid="uid://dieo56i3x523j" path="res://assets/sprites/Sprite-Kletterschuh.png" id="13_w1hpx"]
+[ext_resource type="Texture2D" uid="uid://yb5dhu77k7fm" path="res://assets/sprites/Sprite-Horn.png" id="16_5863w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e7v38"]
 texture = ExtResource("1_mt6u8")
@@ -181,6 +186,7 @@ size = Vector2(224, 32)
 size = Vector2(256, 160)
 
 [node name="Map" type="TileMap"]
+texture_filter = 1
 tile_set = SubResource("TileSet_8hbxu")
 rendering_quadrant_size = 32
 format = 2
@@ -196,6 +202,8 @@ texture = SubResource("GradientTexture2D_wieuv")
 
 [node name="StonePick" parent="StartRoom" instance=ExtResource("2_cro3m")]
 position = Vector2(80, 8)
+texture = ExtResource("4_dahpa")
+item_type = "stone_pick"
 
 [node name="Start_Wall_Fissure" parent="StartRoom" node_paths=PackedStringArray("topleft_room", "bottomright_room") instance=ExtResource("3_rel8y")]
 position = Vector2(176, 80)
@@ -233,6 +241,8 @@ shape = SubResource("RectangleShape2D_7fhes")
 
 [node name="IronPick" parent="IronRoom" instance=ExtResource("2_cro3m")]
 position = Vector2(576, -240)
+texture = ExtResource("6_r44mm")
+item_type = "iron_pick"
 
 [node name="PointLight2D" type="PointLight2D" parent="IronRoom"]
 position = Vector2(576, -176)
@@ -321,6 +331,8 @@ position = Vector2(672, 256)
 
 [node name="DiamondPick" parent="SchneiderRoom" instance=ExtResource("2_cro3m")]
 position = Vector2(24, 592)
+texture = ExtResource("9_88hte")
+item_type = "diamond_pick"
 
 [node name="Schneider" parent="SchneiderRoom" instance=ExtResource("6_f2hsc")]
 position = Vector2(664, 592)
@@ -335,6 +347,8 @@ texture = SubResource("GradientTexture2D_wieuv")
 
 [node name="Pencil" parent="StudyRoom" instance=ExtResource("2_cro3m")]
 position = Vector2(976, 440)
+texture = ExtResource("11_hbc4f")
+item_type = "sword"
 
 [node name="Ina" parent="StudyRoom" instance=ExtResource("7_g1mii")]
 position = Vector2(984, 392)
@@ -369,6 +383,8 @@ bottomright_room = NodePath("../../HornRoom")
 
 [node name="Shoes" parent="FrankRoom" instance=ExtResource("2_cro3m")]
 position = Vector2(1552, 120)
+texture = ExtResource("13_w1hpx")
+item_type = "shoes"
 
 [node name="Frank" parent="FrankRoom" instance=ExtResource("8_spkjd")]
 position = Vector2(1448, 128)
@@ -379,17 +395,29 @@ scale = Vector2(4.5, 5)
 enabled = false
 texture = SubResource("GradientTexture2D_wieuv")
 
-[node name="Snek" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("9_pymtp")]
-position = Vector2(1472, 144)
+[node name="SnekSpawn" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
+position = Vector2(1384, 24)
 
-[node name="Snek2" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("9_pymtp")]
-position = Vector2(1480, 56)
+[node name="SnekSpawn2" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
+position = Vector2(1504, 48)
 
-[node name="Snek3" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("9_pymtp")]
-position = Vector2(1440, 184)
+[node name="SnekSpawn3" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
+position = Vector2(1488, 208)
 
-[node name="Snek4" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("9_pymtp")]
-position = Vector2(1400, 112)
+[node name="SnekSpawn4" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
+position = Vector2(1352, 144)
+
+[node name="SnekSpawn5" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
+position = Vector2(1400, 208)
+
+[node name="SnekSpawn6" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
+position = Vector2(1424, 80)
+
+[node name="SnekSpawn7" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
+position = Vector2(1504, 152)
+
+[node name="SnekSpawn8" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
+position = Vector2(1544, 200)
 
 [node name="HornRoom" type="Node2D" parent="."]
 
@@ -414,6 +442,8 @@ position = Vector2(1216, 584)
 
 [node name="Horn" parent="HornRoom" instance=ExtResource("2_cro3m")]
 position = Vector2(856, 616)
+texture = ExtResource("16_5863w")
+item_type = "horn"
 
 [node name="PointLight2D" type="PointLight2D" parent="HornRoom"]
 position = Vector2(1056, 608)
@@ -422,7 +452,11 @@ enabled = false
 texture = SubResource("GradientTexture2D_wieuv")
 
 [node name="Player" parent="." instance=ExtResource("4_akope")]
-position = Vector2(80, 72)
+position = Vector2(80, 128)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0, 0, 0, 1)
 
 [connection signal="body_entered" from="WallRoom/WallArea" to="." method="_on_wall_area_body_entered"]
 [connection signal="body_exited" from="WallRoom/WallArea" to="." method="_on_area_body_exited"]

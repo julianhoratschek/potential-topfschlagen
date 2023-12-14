@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://5hnvvnhqev55"]
+
+[ext_resource type="Theme" uid="uid://bmjnhfngbymmt" path="res://ui/theme.tres" id="1_i1tvj"]
+[ext_resource type="Script" path="res://ui/inventory.gd" id="2_edgm6"]
+[ext_resource type="Texture2D" uid="uid://dsmm0cu14rpc" path="res://assets/sprites/Sprite-ItemBackground.png" id="2_vg87q"]
+
+[node name="ItemBar" type="Panel"]
+custom_minimum_size = Vector2(64, 64)
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 80.0
+offset_bottom = 72.0
+theme = ExtResource("1_i1tvj")
+script = ExtResource("2_edgm6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(54, 54)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vg87q")
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2

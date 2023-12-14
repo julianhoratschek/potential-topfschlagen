@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bii8oivnspjjr"]
+[gd_scene load_steps=6 format=3 uid="uid://bii8oivnspjjr"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_50byi"]
 [ext_resource type="PackedScene" uid="uid://c01ma6xe8uvdg" path="res://scenes/map.tscn" id="1_i2q1j"]
 [ext_resource type="PackedScene" uid="uid://u07rakrkbo1r" path="res://ui/entropy_bar.tscn" id="2_mt05c"]
 [ext_resource type="PackedScene" uid="uid://bcx4eglb788cd" path="res://ui/text_box.tscn" id="3_105yp"]
+[ext_resource type="PackedScene" uid="uid://5hnvvnhqev55" path="res://ui/inventory.tscn" id="5_8g7ne"]
 
 [node name="Main" type="Control"]
+texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,5 +41,14 @@ render_target_update_mode = 4
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="EntropyBar" parent="UI" instance=ExtResource("2_mt05c")]
+offset_left = 96.0
+offset_top = 48.0
+offset_right = 276.0
+offset_bottom = 78.0
 
 [node name="TextBox" parent="UI" instance=ExtResource("3_105yp")]
+visible = false
+
+[node name="Inventory" parent="UI" instance=ExtResource("5_8g7ne")]
+offset_top = 16.0
+offset_bottom = 80.0

@@ -1,3 +1,48 @@
-[gd_scene format=3 uid="uid://gdes5yioucnl"]
+[gd_scene load_steps=8 format=3 uid="uid://gdes5yioucnl"]
 
-[node name="Frank" type="Node2D"]
+[ext_resource type="Script" path="res://prefabs/frank.gd" id="1_kj1i2"]
+[ext_resource type="Texture2D" uid="uid://qpl45eixj3nv" path="res://assets/sprites/Sprite-Bonitz-multi.png" id="2_8uyce"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7o14"]
+radius = 14.3178
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po4qd"]
+atlas = ExtResource("2_8uyce")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eahqv"]
+atlas = ExtResource("2_8uyce")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_18ohb"]
+atlas = ExtResource("2_8uyce")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o17tv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po4qd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eahqv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_18ohb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Frank" type="CharacterBody2D"]
+script = ExtResource("1_kj1i2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a7o14")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o17tv")
+autoplay = "default"
+frame = 2
+frame_progress = 0.770652
