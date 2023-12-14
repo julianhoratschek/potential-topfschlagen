@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://c47wcnx0dvgtp"]
+[gd_scene load_steps=3 format=3 uid="uid://c47wcnx0dvgtp"]
+
+[ext_resource type="Theme" uid="uid://bmjnhfngbymmt" path="res://ui/theme.tres" id="1_7ir21"]
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="2_w1rx3"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -7,3 +10,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_7ir21")
+script = ExtResource("2_w1rx3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control4" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_7ir21")
+theme_override_font_sizes/font_size = 45
+text = "Wie Neele in den Potentialtopf fiel"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(348, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_7ir21")
+text = "Spielen"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(348, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_7ir21")
+text = "Beenden"
+
+[node name="Control3" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="button_down" from="VBoxContainer/PlayButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_button_down"]

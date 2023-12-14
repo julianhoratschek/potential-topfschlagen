@@ -9,5 +9,7 @@ func _ready():
 	
 	globals.player.interact.connect(globals.textbox.call_queue)
 	globals.player.item_changed.connect($UI/Inventory.set_texture)
-	
-	
+
+
+func _on_audio_stream_player_finished():
+	$AudioStreamPlayer.play()
