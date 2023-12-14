@@ -451,7 +451,7 @@ position = Vector2(672, 256)
 [node name="SchneiderRoom" type="Node2D" parent="."]
 
 [node name="DiamondPick" parent="SchneiderRoom" instance=ExtResource("2_cro3m")]
-position = Vector2(24, 592)
+position = Vector2(24, 576)
 texture = ExtResource("9_88hte")
 item_type = "diamond_pick"
 
@@ -501,8 +501,21 @@ bottomright_room = NodePath("../../FrankRoom")
 
 [node name="FrankRoom" type="Node2D" parent="."]
 
+[node name="DeleteButton" type="Area2D" parent="FrankRoom"]
+visible = false
+position = Vector2(1440, 144)
+monitoring = false
+
+[node name="Sprite2D" type="Sprite2D" parent="FrankRoom/DeleteButton"]
+texture = ExtResource("17_h6uk5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrankRoom/DeleteButton"]
+shape = SubResource("RectangleShape2D_fhsor")
+
 [node name="Shoes" parent="FrankRoom" instance=ExtResource("2_cro3m")]
-position = Vector2(1552, 120)
+process_mode = 4
+visible = false
+position = Vector2(1440, 88)
 texture = ExtResource("13_w1hpx")
 item_type = "shoes"
 
@@ -539,15 +552,6 @@ position = Vector2(1504, 152)
 [node name="SnekSpawn8" type="Marker2D" parent="FrankRoom" groups=["SnekSpawns"]]
 position = Vector2(1544, 200)
 
-[node name="DeleteButton" type="Area2D" parent="FrankRoom"]
-position = Vector2(1440, 144)
-
-[node name="Sprite2D" type="Sprite2D" parent="FrankRoom/DeleteButton"]
-texture = ExtResource("17_h6uk5")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FrankRoom/DeleteButton"]
-shape = SubResource("RectangleShape2D_fhsor")
-
 [node name="HornRoom" type="Node2D" parent="."]
 
 [node name="Hall_Horn_Fissure" parent="HornRoom" node_paths=PackedStringArray("topleft_room", "bottomright_room") instance=ExtResource("3_rel8y")]
@@ -569,7 +573,7 @@ position = Vector2(1192, 664)
 position = Vector2(1216, 584)
 
 [node name="Horn" parent="HornRoom" instance=ExtResource("2_cro3m")]
-position = Vector2(856, 616)
+position = Vector2(856, 624)
 texture = ExtResource("16_5863w")
 item_type = "horn"
 
@@ -580,7 +584,7 @@ enabled = false
 texture = SubResource("GradientTexture2D_wieuv")
 
 [node name="Player" parent="." instance=ExtResource("4_akope")]
-position = Vector2(1352, 224)
+position = Vector2(64, 96)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
@@ -591,4 +595,6 @@ color = Color(0, 0, 0, 1)
 [connection signal="teleported" from="IronRoom/Hall_Iron_Fissure" to="." method="_on_hall_iron_fissure_teleported"]
 [connection signal="body_entered" from="NeighbourRoom/NeighbourArea" to="." method="_on_neighbour_area_body_entered"]
 [connection signal="body_exited" from="NeighbourRoom/NeighbourArea" to="." method="_on_area_body_exited"]
+[connection signal="body_entered" from="FrankRoom/DeleteButton" to="." method="_on_delete_button_body_entered"]
+[connection signal="ready_to_defeat" from="FrankRoom/Frank" to="." method="_on_frank_ready_to_defeat"]
 [connection signal="teleported" from="HornRoom/Hall_Horn_Fissure" to="." method="_on_hall_horn_fissure_teleported"]

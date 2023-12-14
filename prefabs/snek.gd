@@ -13,6 +13,7 @@ func spawn(at_position: Vector2):
 
 func _physics_process(delta):
 	velocity = (globals.player.position - position).normalized() * 20.0
+	look_at(globals.player.position)
 	move_and_slide()
 
 

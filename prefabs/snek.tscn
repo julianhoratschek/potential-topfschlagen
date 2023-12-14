@@ -50,7 +50,8 @@ script = ExtResource("1_t4v43")
 shape = SubResource("RectangleShape2D_jh43d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_1f676")
 animation = &"slither"
 autoplay = "slither"
-frame_progress = 0.381715
+frame_progress = 0.514818

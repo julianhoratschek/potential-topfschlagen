@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://gdes5yioucnl"]
+[gd_scene load_steps=12 format=3 uid="uid://gdes5yioucnl"]
 
 [ext_resource type="Script" path="res://prefabs/frank.gd" id="1_kj1i2"]
 [ext_resource type="Texture2D" uid="uid://buwqhqmycrhhp" path="res://assets/sprites/Sprite-Frank.png" id="2_as3k7"]
@@ -14,9 +14,13 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("2_as3k7")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qv035"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_up1ci"]
 atlas = ExtResource("2_as3k7")
-region = Rect2(0, 0, 32, 32)
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2cly"]
+atlas = ExtResource("2_as3k7")
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s8mjw"]
 atlas = ExtResource("2_as3k7")
@@ -45,8 +49,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qv035")
+"texture": SubResource("AtlasTexture_up1ci")
 }, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2cly")
+}],
+"loop": true,
+"name": &"defeatable",
+"speed": 2.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s8mjw")
 }, {
@@ -69,6 +81,5 @@ shape = SubResource("CircleShape2D_a7o14")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o17tv")
+animation = &"die"
 autoplay = "default"
-frame = 1
-frame_progress = 0.992187
