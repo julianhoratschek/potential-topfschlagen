@@ -69,5 +69,5 @@ func hit():
 
 
 func defeat():
-	await globals.textbox.start_node("")
+	$AnimatedSprite2D.play("die")
 	

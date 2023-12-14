@@ -35,10 +35,13 @@ const nodes := {
 	"schneider_defeat": [
 		"Herzlichen Glückwunsch!", 
 		"Sie sind eine großartige Physikerin, Nelle!"],
-	"schneider_intro": [
+	"schneider_incorrect": [
 		"Heute machen wir Wheatstone-Brücke.", 
 		"Das ist eine ganz komplizierte Schaltung.",
 		"Sie können nicht so einfach den richtigen Widerstand finden."],
+	"frank_intro": [
+		"Huch! Ein unverbesserlicher Informatiker jagt dir seine Schlangen auf den Hals!",
+		"Kämpf um dein Leben!"],
 	"neighbours_no_horn": [
 		"Was zur Hölle machen deine Nachbarn hier?",
 		"LÄRM!",

@@ -23,27 +23,49 @@ var text_box: TextBox
 var inventory: Dictionary
 var selected_item := ""
 var state := State.Idle
+var iframes_counter := -1.0
 
 # TODO interact
 # TODO attack
 # TODO health
 
+func _process(delta):
+	iframes_counter -= delta
+	if iframes_counter < 0:
+		visible = true
+		return
+	
+	visible = not visible
+
 
 func _physics_process(delta):
-	velocity = Vector2.ZERO
-	var direction = Input.get_vector("game_left", "game_right", "game_up", "game_down")
+	var collided = false
 	
-	if direction:
-		velocity = direction * speed
-		$AnimatedSprite2D.rotation = direction.angle() + 0.5 * PI
+	if iframes_counter < 0:
+		for i in get_slide_collision_count():
+			var collision := get_slide_collision(i)
+			var collider := collision.get_collider()
+			if collider is Enemy:
+				velocity = (position - collision.get_position()).normalized() * 2000
+				collided = true
+				iframes_counter = 2.5
+				break
+			
+	if not collided:
+		velocity = Vector2.ZERO
+		var direction = Input.get_vector("game_left", "game_right", "game_up", "game_down")
 	
-	if state != State.Attacking:
 		if direction:
-			$AnimatedSprite2D.play("running")
-			state = State.Walking
-		else:
-			state = State.Idle
-			$AnimatedSprite2D.play("idle")
+			velocity = direction * speed
+			$AnimatedSprite2D.rotation = direction.angle() + 0.5 * PI
+	
+		if state != State.Attacking:
+			if direction:
+				$AnimatedSprite2D.play("running")
+				state = State.Walking
+			else:
+				state = State.Idle
+				$AnimatedSprite2D.play("idle")
 
 	move_and_slide()
 
