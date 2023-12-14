@@ -1,33 +1,49 @@
-[gd_scene load_steps=7 format=3 uid="uid://dwba0yvkquax6"]
+[gd_scene load_steps=9 format=3 uid="uid://dwba0yvkquax6"]
 
 [ext_resource type="Script" path="res://prefabs/snek.gd" id="1_t4v43"]
-[ext_resource type="Texture2D" uid="uid://4emxiqt61oqn" path="res://assets/sprites/mouse.png" id="2_a4tp4"]
+[ext_resource type="Texture2D" uid="uid://dhmfe06j53fda" path="res://assets/sprites/Sprite-snek-animation.png" id="2_0rnqa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jh43d"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0f3as"]
-atlas = ExtResource("2_a4tp4")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwxlw"]
+atlas = ExtResource("2_0rnqa")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1o180"]
-atlas = ExtResource("2_a4tp4")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqywu"]
+atlas = ExtResource("2_0rnqa")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuvb7"]
+atlas = ExtResource("2_0rnqa")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuav2"]
+atlas = ExtResource("2_0rnqa")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1f676"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0f3as")
+"texture": SubResource("AtlasTexture_qwxlw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1o180")
+"texture": SubResource("AtlasTexture_iqywu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuvb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuav2")
 }],
 "loop": true,
-"name": &"default",
-"speed": 5.0
+"name": &"slither",
+"speed": 9.0
 }]
 
 [node name="Snek" type="CharacterBody2D"]
+motion_mode = 1
+platform_on_leave = 2
 script = ExtResource("1_t4v43")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -35,4 +51,6 @@ shape = SubResource("RectangleShape2D_jh43d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1f676")
-autoplay = "default"
+animation = &"slither"
+autoplay = "slither"
+frame_progress = 0.381715

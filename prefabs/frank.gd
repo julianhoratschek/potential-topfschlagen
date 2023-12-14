@@ -1,13 +1,14 @@
-extends CharacterBody2D
+extends Enemy
 
 class_name Frank
 
-const MaxVisibility = 1.2
+const MaxVisibility = 2.1
 
 var SnekScene = preload("res://prefabs/snek.tscn")
 var sneks := Array()
 var spawn_points := Array()
 var visibility_counter := MaxVisibility
+var hit_points := 3
 
 func _ready():
 	for i in range(5):
@@ -31,7 +32,7 @@ func _process(delta):
 			if snek.is_alive:
 				return
 	
-		position = spawn_points.pick_random()
+		position = spawn_points.pick_random().position
 		visibility_counter = MaxVisibility
 		show()
 	
@@ -41,3 +42,9 @@ func spawn_sneks():
 		snek.spawn(spawn_points.pick_random().position)
 		add_sibling(snek)
 		await get_tree().create_timer(1.2).timeout
+
+
+func hit():
+	hit_points -= 1
+	if hit_points <= 0:
+		pass

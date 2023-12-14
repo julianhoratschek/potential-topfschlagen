@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://drbltsgdpibo3"]
+
+[ext_resource type="Texture2D" uid="uid://blrpsjn1spbly" path="res://assets/sprites/Sprite-WheatstoneStrom.png" id="1_ucecc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dn5w"]
+atlas = ExtResource("1_ucecc")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_frvuo"]
+atlas = ExtResource("1_ucecc")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c15l8"]
+atlas = ExtResource("1_ucecc")
+region = Rect2(192, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mr7eu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dn5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_frvuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c15l8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vc1gx"]
+size = Vector2(96, 64)
+
+[node name="Wheatstone" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_mr7eu")
+autoplay = "default"
+frame_progress = 0.31365
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_vc1gx")

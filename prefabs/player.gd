@@ -109,7 +109,7 @@ func take(item_type: String, texture: Texture2D):
 
 func start_interaction(text_node: String):
 	$Prompt.show()
-	text_box.queued_node = text_node
+	globals.textbox.queued_node = text_node
 	can_interact = true
 
 func end_interaction():
@@ -117,4 +117,5 @@ func end_interaction():
 	can_interact = false
 
 func can_transverse(solidity: int) -> bool:
+	return true
 	return fissure_level >= solidity and selected_item == "pick"

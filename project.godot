@@ -60,5 +60,6 @@ game_attack={
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 textures/size/viewport_height=648
 textures/size/viewport_width=1152

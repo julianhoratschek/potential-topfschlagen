@@ -135,6 +135,8 @@ animations = [{
 radius = 13.0384
 
 [node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+platform_on_leave = 2
 script = ExtResource("1_wl21c")
 
 [node name="Camera2D" type="Camera2D" parent="."]

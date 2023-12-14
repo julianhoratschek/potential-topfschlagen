@@ -2,6 +2,8 @@ extends AnimatedSprite2D
 
 class_name Fissure
 
+signal teleported(fissure, player, teleport_offset, from_room, to_room)
+
 @export_enum("horizontal", "vertical") var orientation := "horizontal"
 @export_enum("Stone:1", "Iron:2", "Diamond:3") var solidity := 1
 @export var topleft_room: Node2D
@@ -40,17 +42,25 @@ func _ready():
 	_update_areas()
 	play()
 
+
+func teleport(player: Player, teleport_offset: Vector2, from_room, to_room):
+	player.position = position + teleport_offset
+	from_room.find_child("PointLight2D").enabled = false
+	to_room.find_child("PointLight2D").enabled = true
+
+
 func _body_entered_area(body, teleport_offset: Vector2, from_room, to_room):
 	if not can_teleport and body is Player:
 		if body.can_transverse(solidity):
-			body.position = position + teleport_offset
-			from_room.find_child("PointLight2D").enabled = false
-			to_room.find_child("PointLight2D").enabled = true
+			teleport(body, teleport_offset, from_room, to_room)
+			teleported.emit(self, body, teleport_offset, from_room, to_room)
 			can_teleport = true
 		else:
 			body.start_interaction("wrong_pick")
 
 func _body_exited_area(body):
-	if can_teleport and body is Player:
-		can_teleport = false
-		# TODO
+	if body is Player:
+		body.end_interaction()
+		if can_teleport:
+			can_teleport = false
+		

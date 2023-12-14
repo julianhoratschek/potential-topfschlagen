@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cxmvthq3etcha"]
+[gd_scene load_steps=19 format=3 uid="uid://cxmvthq3etcha"]
 
 [ext_resource type="Texture2D" uid="uid://btnxtwfbnye7k" path="res://assets/sprites/quantum_fissure_horizontal.png" id="1_b3qw3"]
 [ext_resource type="Texture2D" uid="uid://dr33oxf1dflej" path="res://assets/sprites/quantum_fissure.png" id="2_p501f"]
@@ -122,31 +122,34 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2ypj"]
-size = Vector2(32, 32)
+size = Vector2(8, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w06oj"]
+size = Vector2(32, 8)
 
 [node name="Fissure" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_oq3he")
-animation = &"horizontal1"
+animation = &"vertical1"
 script = ExtResource("3_1nlo8")
 
 [node name="LeftTopArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftTopArea"]
-position = Vector2(-32, 0)
+position = Vector2(-20, 0)
 shape = SubResource("RectangleShape2D_d2ypj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="LeftTopArea"]
 process_mode = 4
-position = Vector2(0, -48)
-shape = SubResource("RectangleShape2D_d2ypj")
+position = Vector2(0, -36)
+shape = SubResource("RectangleShape2D_w06oj")
 
 [node name="RightBottomArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightBottomArea"]
-position = Vector2(32, 0)
+position = Vector2(20, 0)
 shape = SubResource("RectangleShape2D_d2ypj")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="RightBottomArea"]
 process_mode = 4
-position = Vector2(0, 48)
-shape = SubResource("RectangleShape2D_d2ypj")
+position = Vector2(0, 36)
+shape = SubResource("RectangleShape2D_w06oj")

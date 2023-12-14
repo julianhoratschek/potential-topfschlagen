@@ -13,13 +13,22 @@ func _on_area_body_exited(body):
 		player.end_interaction()
 
 
-func _on_bonitz_area_body_entered(body):
-	if body is Player:
-		body.start_interaction(&"no_sword")
-
-
 func _on_neighbour_area_body_entered(body):
 	if body is Player:
 		# TODO player state?
 		body.start_interaction(&"neighbours_no_horn" 
 			if body.selected_item != &"horn" else &"neighbours_horn")
+
+
+func _on_hall_iron_fissure_teleported(fissure, player, teleport_offset, from_room, to_room):
+	if teleport_offset.y < 0:
+		if not "sword" in player.inventory:
+			await globals.textbox.start_node("no_sword")
+			fissure.teleport(player, -teleport_offset, to_room, from_room)
+
+
+func _on_hall_horn_fissure_teleported(fissure, player, teleport_offset, from_room, to_room):
+	if teleport_offset.y > 0:
+		if not "sword" in player.inventory:
+			await globals.textbox.start_node("no_sword")
+			fissure.teleport(player, -teleport_offset, to_room, from_room)
