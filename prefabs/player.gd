@@ -6,6 +6,12 @@ signal dead
 signal interact
 signal item_changed(texture: Texture2D)
 
+enum State {
+	Idle,
+	Walking,
+	Attacking
+}
+
 const speed := 200.0
 
 var entropy := 0.0
@@ -16,6 +22,7 @@ var text_box: TextBox
 
 var inventory: Dictionary
 var selected_item := ""
+var state := State.Idle
 
 # TODO interact
 # TODO attack
@@ -28,10 +35,15 @@ func _physics_process(delta):
 	
 	if direction:
 		velocity = direction * speed
-		$AnimatedSprite2D.animation = "running"
 		$AnimatedSprite2D.rotation = direction.angle() + 0.5 * PI
-	else:
-		$AnimatedSprite2D.animation = "idle"
+	
+	if state != State.Attacking:
+		if direction:
+			$AnimatedSprite2D.play("running")
+			state = State.Walking
+		else:
+			state = State.Idle
+			$AnimatedSprite2D.play("idle")
 
 	move_and_slide()
 
@@ -41,10 +53,23 @@ func _input(event):
 			MOUSE_BUTTON_LEFT:
 				if can_interact:
 					interact.emit()
+					can_interact = false
+				elif selected_item == "sword" and state != State.Attacking:
+					attack()
 			MOUSE_BUTTON_WHEEL_DOWN:
 				scroll_item(-1)
 			MOUSE_BUTTON_WHEEL_UP:
 				scroll_item(1)
+
+
+func attack():
+	$AnimatedSprite2D/SwordArea.monitoring = true
+	$AnimatedSprite2D.play("attack")
+	state = State.Attacking
+	await $AnimatedSprite2D.animation_finished
+	$AnimatedSprite2D/SwordArea.monitoring = false
+	$AnimatedSprite2D.play("idle")
+	state = State.Idle
 
 func scroll_item(index: int):
 	if inventory.is_empty():
@@ -66,6 +91,10 @@ func hit(add_entropy: int):
 	entropy += add_entropy
 	if entropy >= 100:
 		dead.emit()
+
+func hit_enemy(body: Node2D):
+	if body is Enemy:
+		body.hit()
 
 func take(item_type: String, texture: Texture2D):
 	if "pick" in item_type:

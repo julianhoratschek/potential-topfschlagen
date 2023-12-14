@@ -104,4 +104,4 @@ func call_queue():
 	if queued_node == "":
 		return
 	
-	start_node(queued_node)
+	await start_node(queued_node)

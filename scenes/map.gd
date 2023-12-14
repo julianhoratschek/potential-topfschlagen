@@ -5,7 +5,7 @@ extends TileMap
 
 func _on_wall_area_body_entered(body):
 	if body is Player:
-		player.start_interaction("no_shoes")
+		player.start_interaction(&"no_shoes")
 
 
 func _on_area_body_exited(body):
@@ -15,9 +15,11 @@ func _on_area_body_exited(body):
 
 func _on_bonitz_area_body_entered(body):
 	if body is Player:
-		body.start_interaction("no_sword")
+		body.start_interaction(&"no_sword")
 
 
 func _on_neighbour_area_body_entered(body):
 	if body is Player:
-		body.start_interaction("neighbours_no_horn")
+		# TODO player state?
+		body.start_interaction(&"neighbours_no_horn" 
+			if body.selected_item != &"horn" else &"neighbours_horn")
