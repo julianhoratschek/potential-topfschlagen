@@ -119,36 +119,36 @@ text = "Vielen Dank fürs Spielen!"
 
 [node name="Label2" type="Label" parent="CanvasLayer"]
 offset_left = 712.0
-offset_top = 304.0
+offset_top = 224.0
 offset_right = 1217.0
-offset_bottom = 345.0
+offset_bottom = 265.0
 theme = ExtResource("4_rqr1b")
 theme_override_font_sizes/font_size = 22
 text = "Gezeichnensel: Ina"
 
 [node name="Label5" type="Label" parent="CanvasLayer"]
 offset_left = 712.0
-offset_top = 360.0
+offset_top = 280.0
 offset_right = 1217.0
-offset_bottom = 401.0
+offset_bottom = 321.0
 theme = ExtResource("4_rqr1b")
 theme_override_font_sizes/font_size = 22
 text = "Gestorysel: Ina"
 
 [node name="Label3" type="Label" parent="CanvasLayer"]
 offset_left = 712.0
-offset_top = 416.0
+offset_top = 336.0
 offset_right = 1217.0
-offset_bottom = 457.0
+offset_bottom = 377.0
 theme = ExtResource("4_rqr1b")
 theme_override_font_sizes/font_size = 22
 text = "Programmsel: Julian"
 
 [node name="Label4" type="Label" parent="CanvasLayer"]
 offset_left = 712.0
-offset_top = 472.0
+offset_top = 392.0
 offset_right = 1217.0
-offset_bottom = 513.0
+offset_bottom = 433.0
 theme = ExtResource("4_rqr1b")
 theme_override_font_sizes/font_size = 22
 text = "Geneelesel: Neele"

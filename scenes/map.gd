@@ -15,8 +15,8 @@ func _ready():
 func _on_wall_area_body_entered(body):
 	if body is Player:
 		if &"shoes" in body.inventory:
+			body.start_interaction(&"")
 			expecting_item = &"shoes"
-			body.start_interaction(&"with_shoes")
 		else:
 			body.start_interaction(&"no_shoes")
 		
@@ -31,6 +31,8 @@ func _on_area_body_exited(body):
 
 func _on_player_used_item(item_type: String):
 	if item_type != expecting_item:
+		if expecting_item == &"shoes":
+			globals.textbox.start_node(&"wonder_shoes")
 		return
 		
 	match item_type:
@@ -38,12 +40,14 @@ func _on_player_used_item(item_type: String):
 			globals.textbox.start_node(&"neighbours_horn")
 			$NeighbourRoom/InvisibleWall.process_mode = Node.PROCESS_MODE_DISABLED
 		&"shoes":
+			await globals.textbox.start_node(&"with_shoes")
 			get_tree().change_scene_to_file(&"res://scenes/outro.tscn")
 		&"book":
 			globals.textbox.start_node(&"schneider_defeat")
 			$SchneiderRoom/Schneider.set_happy()
 			$SchneiderRoom/Wheatstone.process_mode = Node.PROCESS_MODE_DISABLED
 			$SchneiderRoom/Wheatstone.hide()
+			$SchneiderRoom/Resistor.show()
 
 
 func _on_neighbour_area_body_entered(body):
@@ -75,9 +79,7 @@ func _on_resistor_area_body_entered(body):
 			if not &"book" in body.inventory:
 				$StudyRoom/Book.show()
 				$StudyRoom/Book.process_mode = Node.PROCESS_MODE_INHERIT
-			
-
-
+				
 func _on_frank_ready_to_defeat():
 	var delete_button := $FrankRoom/DeleteButton as Area2D
 	delete_button.show()

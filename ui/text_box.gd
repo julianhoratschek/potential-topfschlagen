@@ -14,6 +14,7 @@ const nodes := {
 	&"wrong_pick": ["Oh nein! Mein Transmissionskoeffizient ist wohl nicht hoch genug."],
 	&"no_shoes": ["Hm, hier kann ich nicht tunneln…"],
 	&"with_shoes": ["Das sollte klappen!"],
+	&"wonder_shoes": ["Ich brauche etwas, womit ich hier herausklettern kann."],
 	&"no_sword": ["Hier komme ich mit Kopfrechnen nicht weiter.", "Das muss ich aufschreiben."],
 	&"sword": ["Die Feder ist mächtiger als das Schwert!", "Ein Bleistift tut’s wohl auch."],
 	&"shoes": ["Für die Quanten.", "Trotzdem nur an klassischen Barrieren einsetzbar.", "Style +3"],
@@ -46,13 +47,13 @@ const nodes := {
 	&"frank_intro": [
 		"Huch! Ein unverbesserlicher Informatiker jagt dir seine Schlangen auf den Hals!",
 		"Kämpf um dein Leben!"],
-	"neighbours_no_horn": [
+	&"neighbours_no_horn": [
 		"Was zur Hölle machen deine Nachbarn hier?",
 		"LÄRM!",
 		"Sie machen LÄRM!",
 		"Du musst dir die Ohren zuhalten, weil du sonst wahnsinniger wirst.",
 		"So kannst du nicht präzise mit der Spitzhacke arbeiten!"],
-	"neighbours_horn": [
+	&"neighbours_horn": [
 		"Voller Rachsucht produzierst du laute Pupsgeräusche mit deinem Horn.",
 		"Deine Nachbarn werden dadurch nicht leiser, aber du fühlst dich besser.",
 		"Die Spitzhacke liegt dir wieder sicher in der Hand."]
@@ -65,7 +66,8 @@ enum State {
 	Finished
 }
 
-@onready var label := $HBoxContainer2/RichTextLabel
+@onready var label := $HBoxContainer2/VBoxContainer/RichTextLabel
+@onready var next_label := $HBoxContainer2/VBoxContainer/NextLabel
 
 var typing_counter := 0.0
 var state := State.Finished
@@ -82,6 +84,7 @@ func _process(delta):
 	typing_counter -= typing_speed
 	label.visible_characters += 1
 	if label.visible_ratio >= 1:
+		$AnimationPlayer.play()
 		state = State.Finished
 
 func _input(event):
@@ -89,6 +92,7 @@ func _input(event):
 		if event.is_pressed() and event.keycode == KEY_SPACE:
 			if state == State.Typing:
 				state = State.Finished
+				$AnimationPlayer.play()
 				label.visible_ratio = 1
 			else:
 				next_block.emit()
@@ -102,6 +106,8 @@ func start_node(text_node: String):
 		label.visible_ratio = 0
 		typing_counter = 0.0
 		state = State.Typing
+		$AnimationPlayer.stop()
+		next_label.visible_ratio = 0
 		await self.next_block
 	hide()
 	queued_node = ""

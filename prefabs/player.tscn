@@ -112,26 +112,26 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wxdf"]
 size = Vector2(4, 39)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_macj5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n8ffr"]
 atlas = ExtResource("3_42lmp")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7b7mq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6l716"]
 atlas = ExtResource("3_42lmp")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_to7e0"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_unoya"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_macj5")
+"texture": SubResource("AtlasTexture_n8ffr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7b7mq")
+"texture": SubResource("AtlasTexture_6l716")
 }],
 "loop": true,
 "name": &"default",
-"speed": 3.0
+"speed": 2.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wbq56"]
@@ -163,10 +163,11 @@ debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
 [node name="Prompt" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -32)
-sprite_frames = SubResource("SpriteFrames_to7e0")
+position = Vector2(0, -31)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_unoya")
 autoplay = "default"
-frame_progress = 0.878723
+frame_progress = 0.592244
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wbq56")

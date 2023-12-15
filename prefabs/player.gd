@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-signal dead
+signal on_hit(entropy: float)
 signal interact(selected_item: String)
 signal item_changed(texture: Texture2D)
 
@@ -53,11 +53,10 @@ func _physics_process(delta):
 			if collider is Enemy:
 				if collider.harmless:
 					continue
-				$HurtPlayer.play()
-				velocity = (position - collision.get_position()).normalized() * Knockback
 				collided = true
-				iframes_counter = IFramesMax
-				iframes = true
+				velocity = (position - collision.get_position()).normalized() * Knockback
+				hit(collider.atk_points)
+				
 				break
 			
 	if not collided:
@@ -124,8 +123,16 @@ func scroll_item(index: int):
 
 func hit(add_entropy: int):
 	entropy += add_entropy
+	
+	$HurtPlayer.play()
+	iframes_counter = IFramesMax
+	iframes = true
+				
+	on_hit.emit(entropy)
+	
 	if entropy >= 100:
-		dead.emit()
+		await globals.textbox.start_node(&"game_over")
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 
 func hit_enemy(body: Node2D):
 	if body is Enemy:
