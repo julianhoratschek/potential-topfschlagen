@@ -772,6 +772,7 @@ position = Vector2(1544, 200)
 [node name="Hall_Horn_Fissure" parent="HornRoom" node_paths=PackedStringArray("topleft_room", "bottomright_room") instance=ExtResource("3_rel8y")]
 position = Vector2(1200, 512)
 orientation = "vertical"
+solidity = 2
 topleft_room = NodePath("../../VerticalHall")
 bottomright_room = NodePath("..")
 

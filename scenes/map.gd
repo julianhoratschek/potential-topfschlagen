@@ -1,16 +1,42 @@
 extends TileMap
 
-
-@onready var player: Player = $Player
-
-var expecting_item := ""
+var expecting_item := &""
 
 func _ready():
 	for node in get_tree().get_nodes_in_group(&"Neighbours"):
 		node.finished.connect(_on_audio_stream_player_2d_finished.bind(node))
-		
-	player.interact.connect(_on_player_used_item)
 
+
+func _on_player_used_item(item_type: String):
+	# Called everytime an Item is used (left-click)
+	# Used to catch special item uses in predefined locations
+	
+	if item_type != expecting_item:
+		match expecting_item :
+			&"shoes":
+				globals.textbox.start_node(&"wonder_shoes")
+			&"horn":
+				globals.textbox.start_node(&"wonder_horn")
+			&"book":
+				globals.textbox.start_node(&"wonder_book")
+		return
+		
+	match item_type:
+		&"horn":
+			globals.textbox.start_node(&"neighbours_horn")
+			$NeighbourRoom/InvisibleWall.process_mode = Node.PROCESS_MODE_DISABLED
+			
+		&"shoes":
+			await globals.textbox.start_node(&"with_shoes")
+			get_tree().change_scene_to_file(&"res://scenes/outro.tscn")
+			
+		&"book":
+			globals.textbox.start_node(&"schneider_defeat")
+			$SchneiderRoom/Schneider.set_happy()
+			$SchneiderRoom/Wheatstone.process_mode = Node.PROCESS_MODE_DISABLED
+			$SchneiderRoom/Wheatstone.hide()
+			$SchneiderRoom/Resistor.show()
+		
 
 func _on_wall_area_body_entered(body):
 	if body is Player:
@@ -24,30 +50,12 @@ func _on_wall_area_body_entered(body):
 
 func _on_area_body_exited(body):
 	if body is Player:
-		player.end_interaction()
+		globals.player.end_interaction()
 		globals.textbox.queued_node = &""
 		expecting_item = &""
 
 
-func _on_player_used_item(item_type: String):
-	if item_type != expecting_item:
-		if expecting_item == &"shoes":
-			globals.textbox.start_node(&"wonder_shoes")
-		return
-		
-	match item_type:
-		&"horn":
-			globals.textbox.start_node(&"neighbours_horn")
-			$NeighbourRoom/InvisibleWall.process_mode = Node.PROCESS_MODE_DISABLED
-		&"shoes":
-			await globals.textbox.start_node(&"with_shoes")
-			get_tree().change_scene_to_file(&"res://scenes/outro.tscn")
-		&"book":
-			globals.textbox.start_node(&"schneider_defeat")
-			$SchneiderRoom/Schneider.set_happy()
-			$SchneiderRoom/Wheatstone.process_mode = Node.PROCESS_MODE_DISABLED
-			$SchneiderRoom/Wheatstone.hide()
-			$SchneiderRoom/Resistor.show()
+
 
 
 func _on_neighbour_area_body_entered(body):

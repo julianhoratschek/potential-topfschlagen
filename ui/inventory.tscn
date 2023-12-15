@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://5hnvvnhqev55"]
+[gd_scene load_steps=3 format=3 uid="uid://5hnvvnhqev55"]
 
 [ext_resource type="Theme" uid="uid://bmjnhfngbymmt" path="res://ui/theme.tres" id="1_i1tvj"]
-[ext_resource type="Script" path="res://ui/inventory.gd" id="2_edgm6"]
 [ext_resource type="Texture2D" uid="uid://dsmm0cu14rpc" path="res://assets/sprites/Sprite-ItemBackground.png" id="2_vg87q"]
 
 [node name="ItemBar" type="Panel"]
@@ -11,9 +10,8 @@ offset_top = 8.0
 offset_right = 80.0
 offset_bottom = 72.0
 theme = ExtResource("1_i1tvj")
-script = ExtResource("2_edgm6")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="BackgroundRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(54, 54)
 layout_mode = 1
 anchors_preset = 8
@@ -29,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_vg87q")
 
-[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+[node name="ItemRect" type="TextureRect" parent="BackgroundRect"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 1
 anchors_preset = 8

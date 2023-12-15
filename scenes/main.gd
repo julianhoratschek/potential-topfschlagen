@@ -8,7 +8,9 @@ func _ready():
 	globals.player = $SubViewportContainer/SubViewport/Map/Player
 	
 	globals.player.interact.connect(globals.textbox.call_queue)
-	globals.player.item_changed.connect($UI/Inventory.set_texture)
+	globals.player.interact.connect($SubViewportContainer/SubViewport/Map._on_player_used_item)
+	
+	globals.player.item_changed.connect($UI/Inventory/BackgroundRect/ItemRect.set_texture)
 	
 	globals.player.on_hit.connect($UI/EntropyBar.add_entropy)
 

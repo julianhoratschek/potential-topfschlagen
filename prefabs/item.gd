@@ -2,8 +2,9 @@ extends Sprite2D
 
 class_name Item
 
-@export_enum("stone_pick", "iron_pick", "diamond_pick", "sword", "shoes", "horn", "book") 
+@export_enum(&"stone_pick", &"iron_pick", &"diamond_pick", &"sword", &"shoes", &"horn", &"book") 
 var item_type := "horn"
+
 
 func pickup(selected_item: String, player: Player):
 	player.take(item_type, texture)
