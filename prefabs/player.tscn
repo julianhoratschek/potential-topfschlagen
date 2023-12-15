@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://c3byjcsyu8gr8"]
+[gd_scene load_steps=23 format=3 uid="uid://c3byjcsyu8gr8"]
 
 [ext_resource type="Texture2D" uid="uid://dr5b88qdyw6jj" path="res://assets/sprites/neele.png" id="1_rftvf"]
 [ext_resource type="Script" path="res://prefabs/player.gd" id="1_wl21c"]
 [ext_resource type="Texture2D" uid="uid://4emxiqt61oqn" path="res://assets/sprites/mouse.png" id="3_42lmp"]
+[ext_resource type="AudioStream" uid="uid://cyqexm5n7wle0" path="res://assets/sound/fx/vegan-fart-voice-003-11981.mp3" id="4_dn4ko"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_huxx1"]
 atlas = ExtResource("1_rftvf")
@@ -167,5 +168,9 @@ frame_progress = 0.878723
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_wbq56")
+
+[node name="HornFartPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_dn4ko")
+volume_db = -15.407
 
 [connection signal="body_entered" from="AnimatedSprite2D/SwordArea" to="." method="hit_enemy"]

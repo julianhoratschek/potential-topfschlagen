@@ -3,9 +3,13 @@ extends TileMap
 
 @onready var player: Player = $Player
 
+var expecting_item := ""
+
 func _ready():
 	for node in get_tree().get_nodes_in_group(&"Neighbours"):
 		node.finished.connect(_on_audio_stream_player_2d_finished.bind(node))
+		
+	player.interact.connect(_on_player_used_item)
 
 
 func _on_wall_area_body_entered(body):
@@ -16,15 +20,28 @@ func _on_wall_area_body_entered(body):
 func _on_area_body_exited(body):
 	if body is Player:
 		player.end_interaction()
+		globals.textbox.queued_node = &""
+		expecting_item = ""
+
+
+func _on_player_used_item(item_type: String):
+	if item_type != expecting_item:
+		return
+		
+	match item_type:
+		&"horn":
+			globals.textbox.start_node(&"neighbours_horn")
+			$NeighbourRoom/InvisibleWall.process_mode = Node.PROCESS_MODE_DISABLED
+		&"shoes":
+			pass
 
 
 func _on_neighbour_area_body_entered(body):
 	if body is Player:
-		if body.selected_item != &"horn":
-			body.start_interaction(&"neighbours_no_horn")
+		if not &"horn" in body.inventory:
+			globals.textbox.start_node(&"neighbours_no_horn")
 		else:
-			body.start_interaction(&"neighbours_horn")
-			$NeighbourRoom/InvisibleWall.process_mode = Node.PROCESS_MODE_DISABLED
+			expecting_item = &"horn"
 
 
 func _on_hall_iron_fissure_teleported(fissure, player, teleport_offset, from_room, to_room):

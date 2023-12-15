@@ -103,7 +103,7 @@ func start_node(text_node: String):
 	get_tree().paused = false
 
 
-func call_queue():
+func call_queue(selected_item: String):
 	if queued_node == "":
 		return
 	

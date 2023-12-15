@@ -461,7 +461,7 @@ fill_from = Vector2(0.5, 0.5)
 size = Vector2(224, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fhes"]
-size = Vector2(256, 96)
+size = Vector2(256, 176)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8tc2"]
 size = Vector2(256, 40)
@@ -573,7 +573,7 @@ bottomright_room = NodePath("../../StudyRoom")
 position = Vector2(576, 256)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NeighbourRoom/NeighbourArea"]
-position = Vector2(0, 80)
+position = Vector2(0, 64)
 shape = SubResource("RectangleShape2D_7fhes")
 
 [node name="PointLight2D" type="PointLight2D" parent="NeighbourRoom"]

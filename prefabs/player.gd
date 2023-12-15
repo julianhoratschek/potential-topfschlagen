@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Player
 
 signal dead
-signal interact
+signal interact(selected_item: String)
 signal item_changed(texture: Texture2D)
 
 enum State {
@@ -12,30 +12,35 @@ enum State {
 	Attacking
 }
 
-const speed := 200.0
+const Speed := 200.0
+const IFramesMax := 2.5
+const Knockback := 2000
 
 var entropy := 0.0
 var can_interact := false
 var fissure_level := 0
 
-var text_box: TextBox
-
 var inventory: Dictionary
-var selected_item := ""
+var selected_item := &""
 var state := State.Idle
+
 var iframes_counter := -1.0
+var iframes := false
 
 # TODO interact
 # TODO attack
 # TODO health
 
 func _process(delta):
+	if not iframes:
+		return
+		
 	iframes_counter -= delta
 	if iframes_counter < 0:
 		visible = true
-		return
-	
-	visible = not visible
+		iframes = false
+	else:
+		visible = not visible
 
 
 func _physics_process(delta):
@@ -46,26 +51,26 @@ func _physics_process(delta):
 			var collision := get_slide_collision(i)
 			var collider := collision.get_collider()
 			if collider is Enemy:
-				velocity = (position - collision.get_position()).normalized() * 2000
+				velocity = (position - collision.get_position()).normalized() * Knockback
 				collided = true
-				iframes_counter = 2.5
+				iframes_counter = IFramesMax
 				break
 			
 	if not collided:
 		velocity = Vector2.ZERO
-		var direction = Input.get_vector("game_left", "game_right", "game_up", "game_down")
+		var direction = Input.get_vector(&"game_left", &"game_right", &"game_up", &"game_down")
 	
 		if direction:
-			velocity = direction * speed
+			velocity = direction * Speed
 			$AnimatedSprite2D.rotation = direction.angle() + 0.5 * PI
 	
 		if state != State.Attacking:
 			if direction:
-				$AnimatedSprite2D.play("running")
+				$AnimatedSprite2D.play(&"running")
 				state = State.Walking
 			else:
 				state = State.Idle
-				$AnimatedSprite2D.play("idle")
+				$AnimatedSprite2D.play(&"idle")
 
 	move_and_slide()
 
@@ -73,11 +78,14 @@ func _input(event):
 	if event is InputEventMouseButton and event.is_pressed():
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:
+				self.interact.emit(selected_item)
+				
 				if can_interact:
-					interact.emit()
-					can_interact = false
-				elif selected_item == "sword" and state != State.Attacking:
+					end_interaction()
+				elif selected_item == &"sword" and state != State.Attacking:
 					attack()
+				elif selected_item == &"horn":
+					$HornFartPlayer.play()
 			MOUSE_BUTTON_WHEEL_DOWN:
 				scroll_item(-1)
 			MOUSE_BUTTON_WHEEL_UP:
@@ -86,11 +94,11 @@ func _input(event):
 
 func attack():
 	$AnimatedSprite2D/SwordArea.monitoring = true
-	$AnimatedSprite2D.play("attack")
+	$AnimatedSprite2D.play(&"attack")
 	state = State.Attacking
 	await $AnimatedSprite2D.animation_finished
 	$AnimatedSprite2D/SwordArea.monitoring = false
-	$AnimatedSprite2D.play("idle")
+	$AnimatedSprite2D.play(&"idle")
 	state = State.Idle
 
 func scroll_item(index: int):
@@ -119,11 +127,11 @@ func hit_enemy(body: Node2D):
 		body.hit()
 
 func take(item_type: String, texture: Texture2D):
-	if "pick" in item_type:
-		item_type = "pick"
+	if &"pick" in item_type:
+		item_type = &"pick"
 		fissure_level += 1
 		
-		if selected_item == "":
+		if selected_item == &"":
 			# FIXME
 			scroll_item(1)
 
@@ -140,4 +148,4 @@ func end_interaction():
 
 func can_transverse(solidity: int) -> bool:
 	return true
-	return fissure_level >= solidity and selected_item == "pick"
+	return fissure_level >= solidity and selected_item == &"pick"

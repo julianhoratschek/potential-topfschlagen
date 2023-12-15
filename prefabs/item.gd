@@ -5,7 +5,7 @@ class_name Item
 @export_enum("stone_pick", "iron_pick", "diamond_pick", "sword", "shoes", "horn") 
 var item_type := "Horn"
 
-func pickup(player: Player):
+func pickup(selected_item: String, player: Player):
 	player.take(item_type, texture)
 	queue_free()
 
