@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 class_name Player
 
-signal on_hit(entropy: float)
+signal on_hit
 signal interact(selected_item: String)
 signal item_changed(texture: Texture2D)
 
@@ -128,7 +128,7 @@ func hit(add_entropy: int):
 	iframes_counter = IFramesMax
 	iframes = true
 				
-	on_hit.emit(entropy)
+	on_hit.emit()
 	
 	if entropy >= 100:
 		await globals.textbox.start_node(&"game_over")

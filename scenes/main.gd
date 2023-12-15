@@ -10,7 +10,7 @@ func _ready():
 	globals.player.interact.connect(globals.textbox.call_queue)
 	globals.player.item_changed.connect($UI/Inventory.set_texture)
 	
-	globals.player.on_hit.connect($UI/EntropyBar.set_value_no_signal)
+	globals.player.on_hit.connect($UI/EntropyBar.add_entropy)
 
 
 func _input(event):

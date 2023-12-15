@@ -43,10 +43,10 @@ layout_mode = 2
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="EntropyBar" parent="UI" instance=ExtResource("2_mt05c")]
-offset_left = 96.0
-offset_top = 48.0
-offset_right = 276.0
-offset_bottom = 78.0
+offset_left = 88.0
+offset_top = 16.0
+offset_right = 268.0
+offset_bottom = 46.0
 
 [node name="TextBox" parent="UI" instance=ExtResource("3_105yp")]
 visible = false
