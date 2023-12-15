@@ -1,9 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3byjcsyu8gr8"]
+[gd_scene load_steps=25 format=3 uid="uid://c3byjcsyu8gr8"]
 
 [ext_resource type="Texture2D" uid="uid://dr5b88qdyw6jj" path="res://assets/sprites/neele.png" id="1_rftvf"]
 [ext_resource type="Script" path="res://prefabs/player.gd" id="1_wl21c"]
 [ext_resource type="Texture2D" uid="uid://4emxiqt61oqn" path="res://assets/sprites/mouse.png" id="3_42lmp"]
 [ext_resource type="AudioStream" uid="uid://cyqexm5n7wle0" path="res://assets/sound/fx/vegan-fart-voice-003-11981.mp3" id="4_dn4ko"]
+[ext_resource type="AudioStream" uid="uid://dnuvu1ji440xe" path="res://assets/sound/fx/punch-3-166696.mp3" id="5_ic5fa"]
+[ext_resource type="AudioStream" uid="uid://bjlfcihpqia1u" path="res://assets/sound/fx/hurt_c_08-102842.mp3" id="6_i8fua"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_huxx1"]
 atlas = ExtResource("1_rftvf")
@@ -108,7 +110,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wxdf"]
-size = Vector2(2, 13)
+size = Vector2(4, 39)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_macj5"]
 atlas = ExtResource("3_42lmp")
@@ -155,7 +157,7 @@ offset = Vector2(0, -18)
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/SwordArea"]
-position = Vector2(10, -43.5)
+position = Vector2(10, -30.5)
 shape = SubResource("RectangleShape2D_4wxdf")
 debug_color = Color(0, 0.6, 0.701961, 0.419608)
 
@@ -172,5 +174,11 @@ shape = SubResource("CircleShape2D_wbq56")
 [node name="HornFartPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_dn4ko")
 volume_db = -15.407
+
+[node name="AttackPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_ic5fa")
+
+[node name="HurtPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_i8fua")
 
 [connection signal="body_entered" from="AnimatedSprite2D/SwordArea" to="." method="hit_enemy"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d4dhkuhkuy5ef"]
+[gd_scene load_steps=11 format=3 uid="uid://d4dhkuhkuy5ef"]
 
 [ext_resource type="Script" path="res://scenes/outro.gd" id="1_h2wcl"]
 [ext_resource type="Texture2D" uid="uid://dpowtphgjmhh7" path="res://assets/tilemaps/kletterwand.png" id="1_u030t"]
 [ext_resource type="Texture2D" uid="uid://dmmv0qr3qhant" path="res://assets/sprites/Sprite-Neele-climb.png" id="2_rkmwb"]
 [ext_resource type="Theme" uid="uid://bmjnhfngbymmt" path="res://ui/theme.tres" id="4_rqr1b"]
+[ext_resource type="AudioStream" uid="uid://c7aml8s67xeij" path="res://assets/sound/8-bit-background-music-for-arcade-game-come-on-mario-164702.mp3" id="5_de14u"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_edsqc"]
 texture = ExtResource("1_u030t")
@@ -125,20 +126,44 @@ theme = ExtResource("4_rqr1b")
 theme_override_font_sizes/font_size = 22
 text = "Gezeichnensel: Ina"
 
-[node name="Label3" type="Label" parent="CanvasLayer"]
+[node name="Label5" type="Label" parent="CanvasLayer"]
 offset_left = 712.0
 offset_top = 360.0
 offset_right = 1217.0
 offset_bottom = 401.0
 theme = ExtResource("4_rqr1b")
 theme_override_font_sizes/font_size = 22
-text = "Programmsel: Julian"
+text = "Gestorysel: Ina"
 
-[node name="Label4" type="Label" parent="CanvasLayer"]
+[node name="Label3" type="Label" parent="CanvasLayer"]
 offset_left = 712.0
 offset_top = 416.0
 offset_right = 1217.0
 offset_bottom = 457.0
 theme = ExtResource("4_rqr1b")
 theme_override_font_sizes/font_size = 22
+text = "Programmsel: Julian"
+
+[node name="Label4" type="Label" parent="CanvasLayer"]
+offset_left = 712.0
+offset_top = 472.0
+offset_right = 1217.0
+offset_bottom = 513.0
+theme = ExtResource("4_rqr1b")
+theme_override_font_sizes/font_size = 22
 text = "Geneelesel: Neele"
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+custom_minimum_size = Vector2(348, 64)
+offset_left = 752.0
+offset_top = 576.0
+offset_right = 1100.0
+offset_bottom = 640.0
+theme = ExtResource("4_rqr1b")
+text = "Beenden"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_de14u")
+autoplay = true
+
+[connection signal="button_down" from="CanvasLayer/Button" to="Outro" method="_on_button_button_down"]

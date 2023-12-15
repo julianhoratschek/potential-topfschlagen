@@ -69,5 +69,7 @@ func hit():
 
 
 func defeat():
-	$AnimatedSprite2D.play("die")
+	if not harmless:
+		harmless = true
+		$AnimatedSprite2D.play("die")
 	

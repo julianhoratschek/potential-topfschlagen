@@ -7,3 +7,7 @@ func _on_play_button_button_down():
 
 func _on_quit_button_button_down():
 	get_tree().quit()
+
+
+func _on_audio_stream_player_2d_finished():
+	$AudioStreamPlayer2D.play()

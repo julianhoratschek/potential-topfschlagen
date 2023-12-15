@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://o6ytqq3rgycl"]
+
+[ext_resource type="Theme" uid="uid://bmjnhfngbymmt" path="res://ui/theme.tres" id="1_2yno5"]
+[ext_resource type="Script" path="res://ui/pause.gd" id="1_tf2ie"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ndvwq"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 0.976471)
+
+[node name="PauseMenu" type="Panel"]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ndvwq")
+script = ExtResource("1_tf2ie")
+
+[node name="PauseMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2yno5")
+
+[node name="Control" type="Control" parent="PauseMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="PauseMenu"]
+layout_mode = 2
+theme = ExtResource("1_2yno5")
+theme_override_font_sizes/font_size = 44
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="Control6" type="Control" parent="PauseMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="PauseMenu"]
+custom_minimum_size = Vector2(348, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_2yno5")
+text = "Weiter"
+
+[node name="Control4" type="Control" parent="PauseMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button2" type="Button" parent="PauseMenu"]
+custom_minimum_size = Vector2(348, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_2yno5")
+text = "Spiel Beenden"
+
+[node name="Control2" type="Control" parent="PauseMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control5" type="Control" parent="PauseMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Control3" type="Control" parent="PauseMenu"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="button_down" from="PauseMenu/Button" to="." method="_on_button_button_down"]
+[connection signal="button_down" from="PauseMenu/Button2" to="." method="_on_button_2_button_down"]

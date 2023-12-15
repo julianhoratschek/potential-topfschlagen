@@ -1,6 +1,8 @@
-extends StaticBody2D
+extends Area2D
 
-var state := "unhappy"
+var state := &"unhappy"
 
-func _process(delta):
-	pass
+
+func set_happy():
+	state = &"happy"
+	$Schneider/AnimatedSprite2D.animation = &"happy"

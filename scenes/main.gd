@@ -11,5 +11,12 @@ func _ready():
 	globals.player.item_changed.connect($UI/Inventory.set_texture)
 
 
+func _input(event):
+	if event is InputEventKey:
+		if event.is_pressed() and event.keycode == KEY_ESCAPE:
+			$SubViewportContainer/PauseMenu.show()
+			get_tree().paused = true
+
+
 func _on_audio_stream_player_finished():
 	$AudioStreamPlayer.play()

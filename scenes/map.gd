@@ -14,14 +14,19 @@ func _ready():
 
 func _on_wall_area_body_entered(body):
 	if body is Player:
-		player.start_interaction(&"no_shoes")
+		if &"shoes" in body.inventory:
+			expecting_item = &"shoes"
+			body.start_interaction(&"with_shoes")
+		else:
+			body.start_interaction(&"no_shoes")
+		
 
 
 func _on_area_body_exited(body):
 	if body is Player:
 		player.end_interaction()
 		globals.textbox.queued_node = &""
-		expecting_item = ""
+		expecting_item = &""
 
 
 func _on_player_used_item(item_type: String):
@@ -33,7 +38,12 @@ func _on_player_used_item(item_type: String):
 			globals.textbox.start_node(&"neighbours_horn")
 			$NeighbourRoom/InvisibleWall.process_mode = Node.PROCESS_MODE_DISABLED
 		&"shoes":
-			pass
+			get_tree().change_scene_to_file(&"res://scenes/outro.tscn")
+		&"book":
+			globals.textbox.start_node(&"schneider_defeat")
+			$SchneiderRoom/Schneider.set_happy()
+			$SchneiderRoom/Wheatstone.process_mode = Node.PROCESS_MODE_DISABLED
+			$SchneiderRoom/Wheatstone.hide()
 
 
 func _on_neighbour_area_body_entered(body):
@@ -62,9 +72,10 @@ func _on_resistor_area_body_entered(body):
 	if body is Player:
 		if $SchneiderRoom/Schneider.state == &"unhappy":
 			globals.textbox.start_node(&"schneider_incorrect")
-		else:
-			await globals.textbox.start_node(&"schneider_defeat")
-			$Wehatstone.queue_free()
+			if not &"book" in body.inventory:
+				$StudyRoom/Book.show()
+				$StudyRoom/Book.process_mode = Node.PROCESS_MODE_INHERIT
+			
 
 
 func _on_frank_ready_to_defeat():
@@ -90,3 +101,25 @@ func _on_hall_neighbour_fissure_teleported(fissure, player, teleport_offset, fro
 
 func _on_audio_stream_player_2d_finished(stream_player: AudioStreamPlayer2D):
 	stream_player.play()
+
+
+func _on_schneider_body_entered(body):
+	if body is Player:
+		if not &"book" in body.inventory:
+			body.start_interaction(&"schneider_talk")
+		else:
+			expecting_item = &"book"
+			body.start_interaction(&"")
+
+
+func _on_neighbour_schneider_fissure_teleported(fissure, player, teleport_offset, from_room, to_room):
+	if teleport_offset.y > 0:
+		get_tree().call_group(&"Neighbours", &"stop")
+	else:
+		get_tree().call_group(&"Neighbours", &"play")
+
+
+func _on_hall_frank_fissure_teleported(fissure, player, teleport_offset, from_room, to_room):
+	if $FrankRoom/Frank.process_mode == Node.PROCESS_MODE_DISABLED:
+		await globals.textbox.start_node(&"frank_intro")
+		$FrankRoom/Frank.process_mode = Node.PROCESS_MODE_INHERIT

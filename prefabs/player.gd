@@ -13,7 +13,7 @@ enum State {
 }
 
 const Speed := 200.0
-const IFramesMax := 2.5
+const IFramesMax := 1.7
 const Knockback := 2000
 
 var entropy := 0.0
@@ -46,14 +46,18 @@ func _process(delta):
 func _physics_process(delta):
 	var collided = false
 	
-	if iframes_counter < 0:
+	if not iframes:
 		for i in get_slide_collision_count():
 			var collision := get_slide_collision(i)
 			var collider := collision.get_collider()
 			if collider is Enemy:
+				if collider.harmless:
+					continue
+				$HurtPlayer.play()
 				velocity = (position - collision.get_position()).normalized() * Knockback
 				collided = true
 				iframes_counter = IFramesMax
+				iframes = true
 				break
 			
 	if not collided:
@@ -96,6 +100,7 @@ func attack():
 	$AnimatedSprite2D/SwordArea.monitoring = true
 	$AnimatedSprite2D.play(&"attack")
 	state = State.Attacking
+	$AttackPlayer.play()
 	await $AnimatedSprite2D.animation_finished
 	$AnimatedSprite2D/SwordArea.monitoring = false
 	$AnimatedSprite2D.play(&"idle")
@@ -144,8 +149,9 @@ func start_interaction(text_node: String):
 
 func end_interaction():
 	$Prompt.hide()
+	globals.textbox.queued_node = &""
 	can_interact = false
 
 func can_transverse(solidity: int) -> bool:
-	return true
+	# return true
 	return fissure_level >= solidity and selected_item == &"pick"

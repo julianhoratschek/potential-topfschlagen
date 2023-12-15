@@ -5,41 +5,45 @@ class_name TextBox
 signal next_block
 
 const nodes := {
-	"intro": [
+	&"intro": [
 		"Ouch!",
 		"Auf dem Weg zur Sternwarte bist du im Dunkeln über einen Riss im Raumzeitkontinuum gestolpert",
 		"und in einen Potentialtopf in den Tiefen des Physikzentrums gefallen.",
 		"Wer weiß, was dich hier alles erwartet!",
 		"Finde lieber schnell einen Weg zurück an die Oberfläche!"],
-	"wrong_pick": ["Oh nein! Mein Transmissionskoeffizient ist wohl nicht hoch genug."],
-	"no_shoes": ["Hm, hier kann ich nicht tunneln…"],
-	"no_sword": ["Hier komme ich mit Kopfrechnen nicht weiter.", "Das muss ich aufschreiben."],
-	"sword": ["Die Feder ist mächtiger als das Schwert!", "Ein Bleistift tut’s wohl auch."],
-	"shoes": ["Für die Quanten.", "Trotzdem nur an klassischen Barrieren einsetzbar.", "Style +3"],
-	"stone_pick": [
+	&"wrong_pick": ["Oh nein! Mein Transmissionskoeffizient ist wohl nicht hoch genug."],
+	&"no_shoes": ["Hm, hier kann ich nicht tunneln…"],
+	&"with_shoes": ["Das sollte klappen!"],
+	&"no_sword": ["Hier komme ich mit Kopfrechnen nicht weiter.", "Das muss ich aufschreiben."],
+	&"sword": ["Die Feder ist mächtiger als das Schwert!", "Ein Bleistift tut’s wohl auch."],
+	&"shoes": ["Für die Quanten.", "Trotzdem nur an klassischen Barrieren einsetzbar.", "Style +3"],
+	&"stone_pick": [
 		"Eine Steinspitzhacke.",
 		"Der Kopf ist wellenförmig geschwungen.",
 		"Ganz okay, um durch Wände zu tunneln!"],
-	"iron_pick": [
+	&"iron_pick": [
 		"Eine Eisenspitzhacke.",
 		"Der Kopf ist wellenförmig geschwungen.",
 		"Echt gut, um durch Wände zu tunneln!"],
-	"diamond_pick": [
+	&"diamond_pick": [
 		"Eine Diamantspitzhacke.",
 		"Der Kopf ist wellenförmig geschwungen.",
 		"Ideal, um durch Wände zu tunneln!"],
-	"horn": ["TRÖÖÖT!", "Wie ein brünftiger Elch.", "Er ist wohl horny…"],
-	"game_over": [
+	&"horn": ["TRÖÖÖT!", "Wie ein brünftiger Elch.", "Er ist wohl horny…"],
+	&"book": ["Ein Physiklehrbuch.", "Das soll auch Ungläubigen helfen, das Licht zu sehen."],
+	&"game_over": [
 		"Quantenfluktuationen haben Anti-Neele hervorgebracht.", 
 		"Du wurdest annihiliert."],
-	"schneider_defeat": [
+	&"schneider_defeat": [
 		"Herzlichen Glückwunsch!", 
 		"Sie sind eine großartige Physikerin, Nelle!"],
-	"schneider_incorrect": [
-		"Heute machen wir Wheatstone-Brücke.", 
+	&"schneider_talk": [
+		"Heute machen wir Wheatstone-Brücke."
+	],
+	&"schneider_incorrect": [
 		"Das ist eine ganz komplizierte Schaltung.",
 		"Sie können nicht so einfach den richtigen Widerstand finden."],
-	"frank_intro": [
+	&"frank_intro": [
 		"Huch! Ein unverbesserlicher Informatiker jagt dir seine Schlangen auf den Hals!",
 		"Kämpf um dein Leben!"],
 	"neighbours_no_horn": [
@@ -81,12 +85,13 @@ func _process(delta):
 		state = State.Finished
 
 func _input(event):
-	if event.is_pressed():
-		if state == State.Typing:
-			state = State.Finished
-			label.visible_ratio = 1
-		else:
-			next_block.emit()
+	if event is InputEventKey:
+		if event.is_pressed() and event.keycode == KEY_SPACE:
+			if state == State.Typing:
+				state = State.Finished
+				label.visible_ratio = 1
+			else:
+				next_block.emit()
 			
 
 func start_node(text_node: String):
@@ -104,7 +109,7 @@ func start_node(text_node: String):
 
 
 func call_queue(selected_item: String):
-	if queued_node == "":
+	if queued_node == &"":
 		return
 	
 	await start_node(queued_node)

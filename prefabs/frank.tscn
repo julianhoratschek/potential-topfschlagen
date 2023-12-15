@@ -74,6 +74,7 @@ animations = [{
 }]
 
 [node name="Frank" type="CharacterBody2D"]
+process_mode = 4
 script = ExtResource("1_kj1i2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
