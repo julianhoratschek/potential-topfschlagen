@@ -34,7 +34,7 @@ const nodes := {
 	&"book": ["Ein Physiklehrbuch.", "Das soll auch Ungläubigen helfen, das Licht zu sehen."],
 	&"game_over": [
 		"Quantenfluktuationen haben Anti-Neele hervorgebracht.", 
-		"Du wurdest annihiliert."],
+		"Du wurdest anneeleliert."],
 	&"schneider_defeat": [
 		"Herzlichen Glückwunsch!", 
 		"Sie sind eine großartige Physikerin, Nelle!"],
