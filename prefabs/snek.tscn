@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://dwba0yvkquax6"]
+[gd_scene load_steps=25 format=3 uid="uid://dwba0yvkquax6"]
 
 [ext_resource type="Script" path="res://prefabs/snek.gd" id="1_t4v43"]
 [ext_resource type="Texture2D" uid="uid://dhmfe06j53fda" path="res://assets/sprites/Sprite-snek-animation.png" id="2_0rnqa"]
+[ext_resource type="Texture2D" uid="uid://dmtts4emxcg01" path="res://assets/sprites/Sprite-snek-spawn-ani.png" id="3_iytqu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jh43d"]
 
@@ -32,6 +33,54 @@ region = Rect2(64, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_unb0i"]
 atlas = ExtResource("2_0rnqa")
 region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogpeu"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wo6oy"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36waf"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_37dvw"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhaim"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gyihm"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng1mg"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0wgb"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nu240"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g3c63"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpx40"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2kr3k"]
+atlas = ExtResource("3_iytqu")
+region = Rect2(352, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1f676"]
 animations = [{
@@ -65,9 +114,52 @@ animations = [{
 "loop": true,
 "name": &"slither",
 "speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogpeu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wo6oy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36waf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37dvw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhaim")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gyihm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ng1mg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0wgb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nu240")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g3c63")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpx40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2kr3k")
+}],
+"loop": false,
+"name": &"spawn",
+"speed": 16.0
 }]
 
 [node name="Snek" type="CharacterBody2D"]
+process_mode = 4
+visible = false
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_t4v43")
@@ -78,7 +170,7 @@ shape = SubResource("RectangleShape2D_jh43d")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_1f676")
-animation = &"cry"
-autoplay = "slither"
-frame = 2
+animation = &"spawn"
+autoplay = "spawn"
+frame = 11
 frame_progress = 1.0

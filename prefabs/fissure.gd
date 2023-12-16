@@ -1,19 +1,29 @@
+## "Doors" connecting rooms vertically or horizontally, managing lights
+## when a room is left or entered.
+
 extends AnimatedSprite2D
 
 class_name Fissure
 
-signal teleported(fissure, player, teleport_offset, from_room, to_room)
+## Emittet after Player was moved through a wall
+signal teleported(fissure: Fissure, player: Player, teleport_offset: Vector2, from_room: Node2D, to_room: Node2D)
 
-@export_enum(&"horizontal", &"vertical") var orientation := "horizontal"
-@export_enum("Stone:1", "Iron:2", "Diamond:3") var solidity := 1
+@export_enum(&"horizontal", &"vertical") 
+var orientation := "horizontal"
+
+@export_enum("Stone:1", "Iron:2", "Diamond:3") 
+var solidity := 1
+
 @export var topleft_room: Node2D
+
 @export var bottomright_room: Node2D
 
 
 @onready var lefttop_area = $LeftTopArea
 @onready var rightbottom_area = $RightBottomArea
 
-var can_teleport := false
+## Used internally to inhibit "teleportation loops"
+var _can_teleport := false
 
 
 func _update_areas():
@@ -51,12 +61,12 @@ func teleport(player: Player, teleport_offset: Vector2, from_room: Node2D, to_ro
 	to_room.find_child(&"PointLight2D").enabled = true
 
 
-func _body_entered_area(body, teleport_offset: Vector2, from_room: Node2D, to_room: Node2D):
-	if not can_teleport and body is Player:
+func _body_entered_area(body: Node2D, teleport_offset: Vector2, from_room: Node2D, to_room: Node2D):
+	if not _can_teleport and body is Player:
 		if body.can_transverse(solidity):
 			teleport(body, teleport_offset, from_room, to_room)
 			teleported.emit(self, body, teleport_offset, from_room, to_room)
-			can_teleport = true
+			_can_teleport = true
 		else:
 			body.start_interaction(&"wrong_pick")
 
@@ -64,6 +74,6 @@ func _body_entered_area(body, teleport_offset: Vector2, from_room: Node2D, to_ro
 func _body_exited_area(body: Node2D):
 	if body is Player:
 		body.end_interaction()
-		if can_teleport:
-			can_teleport = false
+		if _can_teleport:
+			_can_teleport = false
 		

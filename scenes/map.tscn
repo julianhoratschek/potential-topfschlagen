@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c01ma6xe8uvdg"]
+[gd_scene load_steps=39 format=3 uid="uid://c01ma6xe8uvdg"]
 
 [ext_resource type="Texture2D" uid="uid://cpjf32tqno43s" path="res://assets/tilemaps/Sprite-Startraum-Tileset.png" id="1_mt6u8"]
 [ext_resource type="Script" path="res://scenes/map.gd" id="2_72cpn"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://drbltsgdpibo3" path="res://prefabs/wheatstone.tscn" id="18_nid6f"]
 [ext_resource type="Texture2D" uid="uid://cmakujruv434f" path="res://assets/sprites/Sprite-Lehrbuch.png" id="20_xpl57"]
 [ext_resource type="Texture2D" uid="uid://ddrc5didxaqie" path="res://assets/sprites/Sprite-Kletterschuh-grun.png" id="21_52ewh"]
+[ext_resource type="PackedScene" uid="uid://dwba0yvkquax6" path="res://prefabs/snek.tscn" id="23_lhnvb"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e7v38"]
 texture = ExtResource("1_mt6u8")
@@ -732,6 +733,21 @@ item_type = "shoes"
 
 [node name="Frank" parent="FrankRoom" instance=ExtResource("8_spkjd")]
 position = Vector2(1448, 128)
+
+[node name="Snek" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("23_lhnvb")]
+position = Vector2(1368, 160)
+
+[node name="Snek2" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("23_lhnvb")]
+position = Vector2(1432, 32)
+
+[node name="Snek3" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("23_lhnvb")]
+position = Vector2(1440, 224)
+
+[node name="Snek4" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("23_lhnvb")]
+position = Vector2(1520, 104)
+
+[node name="Snek5" parent="FrankRoom" groups=["Sneks"] instance=ExtResource("23_lhnvb")]
+position = Vector2(1336, 16)
 
 [node name="PointLight2D" type="PointLight2D" parent="FrankRoom"]
 position = Vector2(1440, 112)

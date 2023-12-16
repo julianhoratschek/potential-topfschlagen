@@ -16,15 +16,13 @@ var SnekScene = preload("res://prefabs/snek.tscn")
 
 var sneks := Array()
 var spawn_points := Array()
-var visibility_counter := MaxVisibility
+var visibility_counter := MaxVisibility / 2
 var state := State.Visible
 var hit_points := 4
 
 func _ready():
-	for i in range(5):
-		sneks.append(SnekScene.instantiate())
-	
-	spawn_points = get_tree().get_nodes_in_group("SnekSpawns")
+	spawn_points = get_tree().get_nodes_in_group(&"SnekSpawns")
+	sneks = get_tree().get_nodes_in_group(&"Sneks")
 
 
 func _process(delta: float):
@@ -35,8 +33,11 @@ func _process(delta: float):
 				return
 			
 			position = Vector2(5000, 5000)
-			state = State.SpawnSneks
 			hide()
+			state = State.SpawnSneks
+			for snek in sneks:
+				snek.is_alive = true
+				snek.is_moving = false
 			spawn_sneks()
 			
 		State.SpawnSneks:
@@ -57,8 +58,7 @@ func _process(delta: float):
 func spawn_sneks():
 	for snek in sneks:
 		snek.spawn(spawn_points.pick_random().position)
-		add_sibling(snek)
-		await get_tree().create_timer(1.2).timeout
+		await get_tree().create_timer(0.4).timeout
 
 
 func hit():
