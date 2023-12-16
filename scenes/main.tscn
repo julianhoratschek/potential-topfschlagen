@@ -60,5 +60,3 @@ process_mode = 3
 stream = ExtResource("6_mdbal")
 volume_db = -23.07
 autoplay = true
-
-[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

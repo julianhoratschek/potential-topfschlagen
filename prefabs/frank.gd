@@ -8,7 +8,7 @@ enum State {
 	Defeatable
 }
 
-# signal ready_to_defeat
+signal ready_to_defeat
 
 const MaxVisibility = 2.1
 
@@ -27,7 +27,7 @@ func _ready():
 	spawn_points = get_tree().get_nodes_in_group("SnekSpawns")
 
 
-func _process(delta):
+func _process(delta: float):
 	match state:
 		State.Visible:
 			visibility_counter -= delta
@@ -69,7 +69,7 @@ func hit():
 	modulate = modulate.darkened(0.2)
 	$HitPlayer.play()
 	if hit_points == 0:
-		# ready_to_defeat.emit()
+		ready_to_defeat.emit()
 		state = State.Defeatable
 		modulate = Color.WHITE
 		$AnimatedSprite2D.play("defeatable")

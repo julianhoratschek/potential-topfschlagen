@@ -7,7 +7,7 @@ var item_type := "horn"
 
 
 func pickup(type: String, player: Player):
-	var item_name = item_type
+	var item_name := item_type
 	
 	if &"pick" in item_name:
 		item_name = &"pick"
@@ -20,13 +20,13 @@ func pickup(type: String, player: Player):
 	queue_free()
 
 
-func _on_area_2d_body_entered(body):
+func _on_area_2d_body_entered(body: Node2D):
 	if body is Player:
 		body.start_interaction(item_type)
 		body.interact.connect(pickup.bind(body))
 
 
-func _on_area_2d_body_exited(body):
+func _on_area_2d_body_exited(body: Node2D):
 	if body is Player:
 		body.end_interaction()
 		body.interact.disconnect(pickup)

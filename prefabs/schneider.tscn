@@ -1,7 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bx31ot2rs06py"]
+[gd_scene load_steps=9 format=3 uid="uid://bx31ot2rs06py"]
 
 [ext_resource type="Texture2D" uid="uid://vecca6biu8ei" path="res://assets/sprites/Sprite-Schneider.png" id="1_5ion3"]
-[ext_resource type="Script" path="res://prefabs/schneider.gd" id="1_egx1c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4fg3g"]
 size = Vector2(48, 48)
@@ -51,7 +50,6 @@ animations = [{
 radius = 15.0
 
 [node name="Schneider" type="Area2D"]
-script = ExtResource("1_egx1c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_4fg3g")

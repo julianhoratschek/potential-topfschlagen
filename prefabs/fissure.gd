@@ -15,6 +15,7 @@ signal teleported(fissure, player, teleport_offset, from_room, to_room)
 
 var can_teleport := false
 
+
 func _update_areas():
 	var teleport_offset := Vector2(32, 0)
 	
@@ -44,13 +45,13 @@ func _ready():
 	play()
 
 
-func teleport(player: Player, teleport_offset: Vector2, from_room, to_room):
+func teleport(player: Player, teleport_offset: Vector2, from_room: Node2D, to_room: Node2D):
 	player.position = position + teleport_offset
 	from_room.find_child(&"PointLight2D").enabled = false
 	to_room.find_child(&"PointLight2D").enabled = true
 
 
-func _body_entered_area(body, teleport_offset: Vector2, from_room, to_room):
+func _body_entered_area(body, teleport_offset: Vector2, from_room: Node2D, to_room: Node2D):
 	if not can_teleport and body is Player:
 		if body.can_transverse(solidity):
 			teleport(body, teleport_offset, from_room, to_room)
@@ -59,7 +60,8 @@ func _body_entered_area(body, teleport_offset: Vector2, from_room, to_room):
 		else:
 			body.start_interaction(&"wrong_pick")
 
-func _body_exited_area(body):
+
+func _body_exited_area(body: Node2D):
 	if body is Player:
 		body.end_interaction()
 		if can_teleport:

@@ -2,9 +2,9 @@ extends Control
 
 
 func _ready():
-	globals.textbox = $UI/TextBox
-	globals.textbox.start_node("intro")
+	$AudioStreamPlayer.finished.connect($AudioStreamPlayer.play)
 	
+	globals.textbox = $UI/TextBox
 	globals.player = $SubViewportContainer/SubViewport/Map/Player
 	
 	globals.player.interact.connect(globals.textbox.call_queue)
@@ -13,6 +13,8 @@ func _ready():
 	globals.player.item_changed.connect($UI/Inventory/BackgroundRect/ItemRect.set_texture)
 	
 	globals.player.on_hit.connect($UI/EntropyBar.add_entropy)
+	
+	globals.textbox.start_node("intro")
 
 
 func _input(event):
@@ -21,6 +23,3 @@ func _input(event):
 			$SubViewportContainer/PauseMenu.show()
 			get_tree().paused = true
 
-
-func _on_audio_stream_player_finished():
-	$AudioStreamPlayer.play()

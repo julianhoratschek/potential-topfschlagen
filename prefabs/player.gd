@@ -28,7 +28,7 @@ var iframes_counter := -1.0
 var iframes := false
 
 
-func _process(delta):
+func _process(delta: float):
 	# Blink after hit (iframes)
 	if not iframes:
 		return
@@ -41,7 +41,7 @@ func _process(delta):
 		visible = not visible
 
 
-func _physics_process(_delta):
+func _physics_process(_delta: float):
 	var collided = false
 	
 	if not iframes:
@@ -75,7 +75,7 @@ func _physics_process(_delta):
 	move_and_slide()
 
 
-func _input(event):
+func _input(event: InputEvent):
 	if event is InputEventMouseButton and event.is_pressed():
 		match event.button_index:
 			MOUSE_BUTTON_LEFT:

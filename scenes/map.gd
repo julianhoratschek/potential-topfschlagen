@@ -1,5 +1,7 @@
 extends TileMap
 
+@onready var schneider := $SchneiderRoom/Schneider
+
 var expecting_item := &""
 
 
@@ -33,13 +35,14 @@ func _on_player_used_item(item_type: String):
 			
 		&"book":
 			globals.textbox.start_node(&"schneider_defeat")
-			$SchneiderRoom/Schneider.set_happy()
+			$SchneiderRoom/Schneider/Schneider/AnimatedSprite2D.play(&"happy")
 			$SchneiderRoom/Wheatstone.process_mode = Node.PROCESS_MODE_DISABLED
 			$SchneiderRoom/Wheatstone.hide()
 			$SchneiderRoom/Resistor.show()
 
 
 func _on_area_body_exited(body):
+	# Default method for leaving interaction-areas (e.g. around items)
 	if body is Player:
 		globals.player.end_interaction()
 		expecting_item = &""
@@ -81,7 +84,7 @@ func _on_hall_horn_fissure_teleported(fissure, player, teleport_offset, from_roo
 
 func _on_resistor_area_body_entered(body):
 	if body is Player:
-		if $SchneiderRoom/Schneider.state == &"unhappy":
+		if not $SchneiderRoom/Resistor.visible:		# Schneider.animation == "happy"
 			globals.textbox.start_node(&"schneider_incorrect")
 			if not &"book" in body.inventory:
 				$StudyRoom/Book.show()
@@ -89,9 +92,8 @@ func _on_resistor_area_body_entered(body):
 
 
 func _on_frank_ready_to_defeat():
-	var delete_button := $FrankRoom/DeleteButton
-	delete_button.show()
-	delete_button.monitoring = true
+	$FrankRoom/DeleteButton.show()
+	$FrankRoom/DeleteButton.monitoring = true
 
 
 func _on_delete_button_body_entered(body):

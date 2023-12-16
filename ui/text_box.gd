@@ -75,8 +75,8 @@ const nodes := {
 const TypingSpeed := 0.08
 
 enum State {
-	Typing,		# Currently writing
-	Finished	# Done writing
+	Typing,
+	Finished
 }
 
 # Emitted when waiting for User-Input to produce next text block
@@ -90,7 +90,7 @@ var state := State.Finished
 var queued_node := &""
 
 
-func _process(delta):
+func _process(delta: float):
 	# Prints out characters one by one
 	if state != State.Typing:
 		return
@@ -98,26 +98,29 @@ func _process(delta):
 	typing_counter += delta
 	if typing_counter < TypingSpeed:
 		return
-	
 	typing_counter -= TypingSpeed
+	
 	label.visible_characters += 1
 	if label.visible_ratio >= 1:
-		$AnimationPlayer.play()
-		state = State.Finished
+		finish_typing()
 
 
-func _input(event):
-	# User can interrupt typing and display the hole text. Whenn typing is
+func _input(event: InputEvent):
+	# User can interrupt typing and display the whole text. Whenn typing is
 	# finished, the user has to press space to advance the label.
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_SPACE:
 		match state:
 			State.Typing:
-				state = State.Finished
-				$AnimationPlayer.play()
+				finish_typing()
 				label.visible_ratio = 1
 				
 			State.Finished:
 				next_block.emit()
+
+
+func finish_typing():
+	state = State.Finished
+	$AnimationPlayer.play()
 
 
 func start_node(text_node: String):
