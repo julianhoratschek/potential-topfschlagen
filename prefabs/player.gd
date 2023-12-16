@@ -41,7 +41,7 @@ func _process(delta):
 		visible = not visible
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var collided = false
 	
 	if not iframes:
@@ -54,7 +54,7 @@ func _physics_process(delta):
 					continue
 				collided = true
 				velocity = (position - collision.get_position()).normalized() * Knockback
-				hit(collider.atk_points)
+				hit()
 				
 				break
 			
@@ -119,7 +119,7 @@ func scroll_item(index: int):
 	item_changed.emit(inventory[selected_item])
 
 
-func hit(add_entropy: int):	
+func hit():	
 	$HurtPlayer.play()
 	iframes_counter = IFramesMax
 	iframes = true
@@ -130,14 +130,6 @@ func hit(add_entropy: int):
 func hit_enemy(body: Node2D):
 	if body is Enemy:
 		body.hit()
-
-
-func take(item_type: String, texture: Texture2D):
-	if &"pick" in item_type:
-		item_type = &"pick"
-		fissure_level += 1
-
-	inventory[item_type] = texture
 
 
 func start_interaction(text_node: String = &""):

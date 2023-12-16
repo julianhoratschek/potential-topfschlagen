@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://gdes5yioucnl"]
+[gd_scene load_steps=13 format=3 uid="uid://gdes5yioucnl"]
 
 [ext_resource type="Script" path="res://prefabs/frank.gd" id="1_kj1i2"]
 [ext_resource type="Texture2D" uid="uid://buwqhqmycrhhp" path="res://assets/sprites/Sprite-Frank.png" id="2_as3k7"]
+[ext_resource type="AudioStream" uid="uid://hn8o6vncudph" path="res://assets/sound/fx/characterpain-163914.mp3" id="3_cqde6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a7o14"]
 radius = 16.0
@@ -70,7 +71,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"die",
-"speed": 2.0
+"speed": 4.0
 }]
 
 [node name="Frank" type="CharacterBody2D"]
@@ -84,3 +85,6 @@ shape = SubResource("CircleShape2D_a7o14")
 sprite_frames = SubResource("SpriteFrames_o17tv")
 animation = &"die"
 autoplay = "default"
+
+[node name="HitPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cqde6")

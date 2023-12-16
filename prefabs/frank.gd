@@ -8,16 +8,17 @@ enum State {
 	Defeatable
 }
 
-signal ready_to_defeat
+# signal ready_to_defeat
 
 const MaxVisibility = 2.1
 
 var SnekScene = preload("res://prefabs/snek.tscn")
+
 var sneks := Array()
 var spawn_points := Array()
 var visibility_counter := MaxVisibility
 var state := State.Visible
-var hit_points := 3
+var hit_points := 4
 
 func _ready():
 	for i in range(5):
@@ -61,10 +62,16 @@ func spawn_sneks():
 
 
 func hit():
+	if state != State.Visible:
+		return
+		
 	hit_points -= 1
+	modulate = modulate.darkened(0.2)
+	$HitPlayer.play()
 	if hit_points == 0:
-		ready_to_defeat.emit()
+		# ready_to_defeat.emit()
 		state = State.Defeatable
+		modulate = Color.WHITE
 		$AnimatedSprite2D.play("defeatable")
 
 
@@ -72,4 +79,5 @@ func defeat():
 	if not harmless:
 		harmless = true
 		$AnimatedSprite2D.play("die")
+		
 	

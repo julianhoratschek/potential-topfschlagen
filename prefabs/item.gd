@@ -6,8 +6,17 @@ class_name Item
 var item_type := "horn"
 
 
-func pickup(selected_item: String, player: Player):
-	player.take(item_type, texture)
+func pickup(type: String, player: Player):
+	var item_name = item_type
+	
+	if &"pick" in item_name:
+		item_name = &"pick"
+		player.fissure_level += 1
+	
+	player.inventory[item_name] = texture
+	if player.selected_item == item_name:
+		player.item_changed.emit(player.inventory[item_name])
+	
 	queue_free()
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c01ma6xe8uvdg"]
+[gd_scene load_steps=38 format=3 uid="uid://c01ma6xe8uvdg"]
 
 [ext_resource type="Texture2D" uid="uid://cpjf32tqno43s" path="res://assets/tilemaps/Sprite-Startraum-Tileset.png" id="1_mt6u8"]
 [ext_resource type="Script" path="res://scenes/map.gd" id="2_72cpn"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://r8ega6qvatkp" path="res://assets/sprites/Sprite-StoneWavePick.png" id="4_dahpa"]
 [ext_resource type="PackedScene" uid="uid://bx31ot2rs06py" path="res://prefabs/schneider.tscn" id="6_f2hsc"]
 [ext_resource type="Texture2D" uid="uid://c65xoom2bq1qk" path="res://assets/sprites/Sprite-IronWavePick.png" id="6_r44mm"]
-[ext_resource type="PackedScene" uid="uid://c7fylw7xyyawx" path="res://prefabs/ina.tscn" id="7_g1mii"]
 [ext_resource type="PackedScene" uid="uid://gdes5yioucnl" path="res://prefabs/frank.tscn" id="8_spkjd"]
 [ext_resource type="Texture2D" uid="uid://i7hhnyw1tgos" path="res://assets/sprites/Sprite-DiaWavePick.png" id="9_88hte"]
 [ext_resource type="AudioStream" uid="uid://u2b3c2c7qti6" path="res://assets/sound/fx/111614-walking-down-creaky-apartment-stairs-1-72141pixabay.mp3" id="11_0ynau"]
@@ -463,7 +462,7 @@ fill_from = Vector2(0.5, 0.5)
 size = Vector2(224, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fhes"]
-size = Vector2(256, 176)
+size = Vector2(256, 136)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g8tc2"]
 size = Vector2(256, 40)
@@ -591,7 +590,7 @@ bottomright_room = NodePath("../../StudyRoom")
 position = Vector2(576, 256)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="NeighbourRoom/NeighbourArea"]
-position = Vector2(0, 64)
+position = Vector2(0, 84)
 shape = SubResource("RectangleShape2D_7fhes")
 
 [node name="PointLight2D" type="PointLight2D" parent="NeighbourRoom"]
@@ -684,9 +683,6 @@ position = Vector2(976, 288)
 texture = ExtResource("11_hbc4f")
 item_type = "sword"
 
-[node name="Ina" parent="StudyRoom" instance=ExtResource("7_g1mii")]
-position = Vector2(984, 392)
-
 [node name="PointLight2D" type="PointLight2D" parent="StudyRoom"]
 position = Vector2(976, 288)
 scale = Vector2(4.25, 3.75)
@@ -703,8 +699,8 @@ item_type = "book"
 [node name="VerticalHall" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="VerticalHall"]
-position = Vector2(1200, 232)
-scale = Vector2(3.75, 9.25)
+position = Vector2(1200, 228)
+scale = Vector2(3.5, 9.125)
 enabled = false
 texture = SubResource("GradientTexture2D_wieuv")
 
@@ -823,5 +819,4 @@ color = Color(0, 0, 0, 1)
 [connection signal="body_exited" from="SchneiderRoom/ResistorArea" to="." method="_on_area_body_exited"]
 [connection signal="teleported" from="FrankRoom/Hall_Frank_Fissure" to="." method="_on_hall_frank_fissure_teleported"]
 [connection signal="body_entered" from="FrankRoom/DeleteButton" to="." method="_on_delete_button_body_entered"]
-[connection signal="ready_to_defeat" from="FrankRoom/Frank" to="." method="_on_frank_ready_to_defeat"]
 [connection signal="teleported" from="HornRoom/Hall_Horn_Fissure" to="." method="_on_hall_horn_fissure_teleported"]
